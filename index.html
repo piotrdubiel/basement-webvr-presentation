@@ -3,13 +3,15 @@
 <head>
   <title>Hello, WebVR! - A-Frame</title>
   <meta name="description" content="Hello, WebVR! - A-Frame">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+
 </head>
 <body>
-
   <a-scene>
     <a-assets>
-      <img id="cubes-thumb" crossorigin="anonymous" src="./Zbir6TW.gif">
+      <img id="cubes-thumb" crossorigin="anonymous" src="./giphy.mp4">
     </a-assets>
     <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
       <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
@@ -26,18 +28,23 @@
       <a-sky src="IMG_20170424_142610.vr.jpg" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
 
 
+
       <!-- <a-box position="-1 1.5 -3" rotation="0 90 0" color="#4CC3D9"></a-box>
       <a-sphere position="0 1.25 -6" radius="1.25" color="#EF2D5E">
-        <a-ring position="0 4 -6" color="blue"></a-ring>
-      </a-sphere>
-      <a-cylinder position="0 0.75 -3" rotate="45 0 0" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky> -->
+      <a-ring position="0 4 -6" color="blue"></a-ring>
+    </a-sphere>
+    <a-cylinder position="0 0.75 -3" rotate="45 0 0" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+    <a-sky color="#ECECEC"></a-sky> -->
+    <a-video
+    src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4"
+     autoplay loop="true"
+    geometry="primitive: plane; height: 15.8; width: 25.6"
+    position="-6.8 7.4 -41"
+    ></a-video>
 
-      <a-entity class="link" geometry="primitive: plane; height: 15.8; width: 25.6" position="-6.8 7.4 -41" material="shader: flat; src: #cubes-thumb"></a-entity>
-
-    </a-entity>
-  </a-scene>
-  <div>lol</div>
+  </a-entity>
+</a-scene>
+<div>lol</div>
 </body>
 </html>

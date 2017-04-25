@@ -6,44 +6,105 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@3.x.x/dist/aframe-event-set-component.min.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script>
+  <script>
+  AFRAME.registerComponent('handle-events', {
+    init: function () {
+      var el = this.el;  // <a-box>
+      el.addEventListener('mouseenter', function () {
+        el.setAttribute('color', '#24CAFF');
+      });
+      el.addEventListener('mouseleave', function () {
+        el.setAttribute('color', '#EF2D5E');
+      });
+      el.addEventListener('click', function () {
+        el.setAttribute('scale', {x: 2, y: 1, z: 2});
+      });
+    }
+  });
+  </script>
 
+  <script>
+  AFRAME.registerComponent('play-events', {
+    init: function () {
+      var el = this.el;
+      el.addEventListener('click', function () {
+        console.log(el);
+        el.pause();
+      });
+    }
+  });
+  </script>
+
+  <script>
+  AFRAME.registerComponent('jump', {
+    init: function () {
+      var el = this.el;
+
+      el.addEventListener('click', function () {
+        console.log(el);
+        el.emit('fade');
+
+      });
+    }
+  });
+  </script>
 </head>
 <body>
   <a-scene>
+    <a-camera><a-cursor></a-cursor> </a-camera>
     <a-assets>
-      <img id="cubes-thumb" crossorigin="anonymous" src="./giphy.mp4">
+      <a-asset-item id="myPlyModel" src="./assets/untitled.bake.ply" ></a-asset-item>
+      <a-asset-item id="t-rex" src="./assets/T-Rex.bake.ply" ></a-asset-item>
+      <a-asset-item id="video" src="src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4>
+      <img id="i-like-what-youve-got" src="./assets/IMG_20170424_142610.vr.jpg">
+      <audio id="sound" src="./assets/dino_tyrannosaurus1.wav">
     </a-assets>
-    <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-      <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
 
-    </a-entity>
-
-    <a-entity>
-      <!-- <a-animation attribute="rotation"
-      dur="15000"
-      fill="forwards"
-      to="0 360 0"
-      repeat="0"></a-animation> -->
-
-      <a-sky src="IMG_20170424_142610.vr.jpg" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
+    <a-entity id="left" hand-controls="left"></a-entity>
+    <a-entity id="right" hand-controls="right"></a-entity>
 
 
+    <!-- <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+    <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+  </a-entity> -->
+  <a-box position="14 -9 28" rotation="0 75 0" color="#4CC3D9" handle-events></a-box>
 
-      <!-- <a-box position="-1 1.5 -3" rotation="0 90 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -6" radius="1.25" color="#EF2D5E">
-      <a-ring position="0 4 -6" color="blue"></a-ring>
-    </a-sphere>
-    <a-cylinder position="0 0.75 -3" rotate="45 0 0" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-    <a-sky color="#ECECEC"></a-sky> -->
-    <a-video
-    src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4"
-     autoplay loop="true"
-    geometry="primitive: plane; height: 15.8; width: 25.6"
-    position="-6.8 7.4 -41"
-    ></a-video>
-
+  <a-entity ply-model="src: #myPlyModel" rotation="-90 0 0" position="-1 -10 -20" scale="0.2 0.2 0.2"></a-entity>
+  <a-entity ply-model="src: #t-rex" rotation="-90 -135 0" position="-1 -16 28" scale="0.2 0.2 0.2"
+  sound="src: #sound; on: click">
+  <a-animation attribute="position" from="-1 -16 28" to="-6 0 28" repeat="indefinite" direction="alternate-reverse" begin="click"></a-animation>
   </a-entity>
+  <a-entity id="river" geometry="primitive: plane" material="color: blue"
+  position="-10 0 0" ></a-entity>
+  <a-sky src="#background" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
+
+  <a-video id="video" src="#i-like-what-youve-got" autoplay loop="true" geometry="primitive: plane; height: 7.2; width: 12" position="-17.7 -0.2 -6.554" rotation="0 70 0"></a-video>
+  <a-entity>
+
+
+    <!-- <a-animation attribute="rotation"
+    dur="15000"
+    fill="forwards"
+    to="0 360 0"
+    repeat="0"></a-animation> -->
+
+
+    <!--
+    <a-sphere position="0 1.25 -6" radius="1.25" color="#EF2D5E">
+    <a-ring position="0 4 -6" color="blue"></a-ring>
+  </a-sphere>
+  <a-cylinder position="0 0.75 -3" rotate="45 0 0" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+  <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+
+  <a-video play-events
+  src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4"
+  autoplay loop="true"
+  geometry="primitive: plane; height: 15.8; width: 25.6"
+  position="-6.8 7.4 -41"
+  ></a-video>
+
+</a-entity>
 </a-scene>
 <div>lol</div>
 </body>

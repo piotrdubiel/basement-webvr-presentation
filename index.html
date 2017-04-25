@@ -37,14 +37,18 @@
   </script>
 
   <script>
-  AFRAME.registerComponent('jump', {
+  var count = 1;
+  AFRAME.registerComponent('slides', {
     init: function () {
       var el = this.el;
-
       el.addEventListener('click', function () {
-        console.log(el);
-        el.emit('fade');
-
+        count++;
+        if(count>15){
+          count = 1;
+        }
+        console.log("./assets/slides/" + count + ".png")
+        var sceneEl = document;
+        sceneEl.querySelectorAll('a-image')[0].setAttribute('src',"./assets/slides/" + count + ".png")
       });
     }
   });
@@ -57,30 +61,31 @@
       <a-asset-item id="myPlyModel" src="./assets/untitled.bake.ply" ></a-asset-item>
       <a-asset-item id="t-rex" src="./assets/T-Rex.bake.ply" ></a-asset-item>
       <a-asset-item id="video" src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4">
-      <img id="background" src="./assets/background.jpg">
-      <img id="slide" src="./assets/slides/01.png">
+        <img id="background" src="./assets/background.jpg">
+        <img id="slide" src="./assets/slides/1.png">
 
-      <audio id="sound" src="./assets/dino_tyrannosaurus1.wav">
-    </a-assets>
+        <audio id="sound" src="./assets/dino_tyrannosaurus1.wav">
+        </a-assets>
 
-    <a-entity id="left" hand-controls="left"></a-entity>
-    <a-entity id="right" hand-controls="right"></a-entity>
+        <a-entity id="left" hand-controls="left"></a-entity>
+        <a-entity id="right" hand-controls="right"></a-entity>
 
 
-    <!-- <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-    <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
-  </a-entity> -->
-  <a-box position="14 -9 28" rotation="0 75 0" color="#4CC3D9" handle-events></a-box>
+        <!-- <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+      </a-entity> -->
+      <a-box position="14 -9 28" rotation="0 75 0" color="#4CC3D9" handle-events></a-box>
 
-  <a-entity ply-model="src: #myPlyModel" rotation="-90 0 0" position="-1 -10 -20" scale="0.2 0.2 0.2"></a-entity>
-  <a-entity ply-model="src: #t-rex" rotation="-90 -135 0" position="-1 -16 28" scale="0.2 0.2 0.2"
-  sound="src: #sound; on: click">
-    <a-animation attribute="position" from="-1 -16 28" to="-6 0 28" repeat="indefinite" direction="alternate-reverse" begin="click"></a-animation>
-  </a-entity>
+      <a-entity ply-model="src: #myPlyModel" rotation="-90 0 0" position="-1 -10 -20" scale="0.2 0.2 0.2"></a-entity>
+      <a-entity ply-model="src: #t-rex" rotation="-90 -135 0" position="-1 -16 28" scale="0.2 0.2 0.2"
+      sound="src: #sound; on: click">
+      <a-animation attribute="position" from="-1 -16 28" to="-6 0 28" repeat="indefinite" direction="alternate-reverse" begin="click"></a-animation>
+    </a-entity>
 
-  <a-sky src="#background" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
+    <a-sky src="#background" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
 
-  <a-image id="" src="#slide" geometry="primitive: plane; height: 9; width: 11" position="-17.7 1.2 -1.8" rotation="0 90 0"></a-image>
+    <a-image id="slide" src="./assets/slides/1.png" geometry="primitive: plane; height: 15.8; width: 25.6"
+    position="-6.8 7.4 -41" slides></a-image>
 
 
     <!-- <a-animation attribute="rotation"
@@ -100,8 +105,8 @@
   <a-video play-events
   src="#video"
   autoplay loop="true"
-  geometry="primitive: plane; height: 15.8; width: 25.6"
-  position="-6.8 7.4 -41"
+  geometry="primitive: plane; height: 9; width: 11" position="-17.7 1.2 -1.8" rotation="0 90 0"
+
   ></a-video>
 
 </a-scene>

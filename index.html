@@ -27,10 +27,24 @@
   <script>
   AFRAME.registerComponent('play-events', {
     init: function () {
-      var el = this.el;  // <a-box>
+      var el = this.el;
       el.addEventListener('click', function () {
         console.log(el);
         el.pause();
+      });
+    }
+  });
+  </script>
+
+  <script>
+  AFRAME.registerComponent('jump', {
+    init: function () {
+      var el = this.el;
+
+      el.addEventListener('click', function () {
+        console.log(el);
+        el.emit('fade');
+
       });
     }
   });
@@ -40,22 +54,29 @@
   <a-scene>
     <a-camera><a-cursor></a-cursor> </a-camera>
     <a-assets>
-
-      <!-- <img id="cubes-thumb" crossorigin="anonymous" src="./giphy.mp4"> -->
+      <a-asset-item id="myPlyModel" src="./assets/untitled.bake.ply" ></a-asset-item>
+      <a-asset-item id="t-rex" src="./assets/T-Rex.bake.ply" ></a-asset-item>
+      <img id="background" src="./assets/IMG_20170424_142610.vr.jpg">
+      <audio id="sound" src="./assets/dino_tyrannosaurus1.wav">
     </a-assets>
 
+    <a-entity id="left" hand-controls="left"></a-entity>
+    <a-entity id="right" hand-controls="right"></a-entity>
 
 
     <!-- <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
     <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
   </a-entity> -->
-  <a-box position="-1 1.5 -3" rotation="0 90 0" color="#4CC3D9" handle-events></a-box>
-  <a-assets>
-    <a-asset-item id="myPlyModel" src="untitled.bake.ply" ></a-asset-item>
-  </a-assets>
-  <a-entity ply-model="src: #myPlyModel" rotation="-90 0 0" position="-1 -10 -20" scale="0.2 0.2 0.2"></a-entity>
+  <a-box position="14 -9 28" rotation="0 75 0" color="#4CC3D9" handle-events></a-box>
 
-  <a-sky src="IMG_20170424_142610.vr.jpg" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
+  <a-entity ply-model="src: #myPlyModel" rotation="-90 0 0" position="-1 -10 -20" scale="0.2 0.2 0.2"></a-entity>
+  <a-entity ply-model="src: #t-rex" rotation="-90 -135 0" position="-1 -16 28" scale="0.2 0.2 0.2"
+  sound="src: #sound; on: click">
+  <a-animation attribute="position" from="-1 -16 28" to="-6 0 28" repeat="indefinite" direction="alternate-reverse" begin="click"></a-animation>
+  </a-entity>
+  <a-entity id="river" geometry="primitive: plane" material="color: blue"
+  position="-10 0 0" ></a-entity>
+  <a-sky src="#background" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
   <a-entity>
     <!-- <a-animation attribute="rotation"
     dur="15000"

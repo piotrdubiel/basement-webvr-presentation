@@ -58,6 +58,8 @@
       <a-asset-item id="t-rex" src="./assets/T-Rex.bake.ply" ></a-asset-item>
       <a-asset-item id="video" src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4">
       <img id="background" src="./assets/background.jpg">
+      <img id="slide" src="./assets/slides/01.png">
+
       <audio id="sound" src="./assets/dino_tyrannosaurus1.wav">
     </a-assets>
 
@@ -73,14 +75,12 @@
   <a-entity ply-model="src: #myPlyModel" rotation="-90 0 0" position="-1 -10 -20" scale="0.2 0.2 0.2"></a-entity>
   <a-entity ply-model="src: #t-rex" rotation="-90 -135 0" position="-1 -16 28" scale="0.2 0.2 0.2"
   sound="src: #sound; on: click">
-  <a-animation attribute="position" from="-1 -16 28" to="-6 0 28" repeat="indefinite" direction="alternate-reverse" begin="click"></a-animation>
+    <a-animation attribute="position" from="-1 -16 28" to="-6 0 28" repeat="indefinite" direction="alternate-reverse" begin="click"></a-animation>
   </a-entity>
-  <a-entity id="river" geometry="primitive: plane" material="color: blue"
-  position="-10 0 0" ></a-entity>
+
   <a-sky src="#background" radius="4000" theta-start="55" theta-length="70" rotation="0 -45 0"></a-sky>
 
-  <a-video id="video" src="#i-like-what-youve-got" autoplay loop="true" geometry="primitive: plane; height: 7.2; width: 12" position="-17.7 -0.2 -6.554" rotation="0 70 0"></a-video>
-  <a-entity>
+  <a-image id="" src="#slide" geometry="primitive: plane; height: 9; width: 11" position="-17.7 1.2 -1.8" rotation="0 90 0"></a-image>
 
 
     <!-- <a-animation attribute="rotation"
@@ -98,13 +98,12 @@
   <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
 
   <a-video play-events
-  src="https://media.giphy.com/media/zTYW6jRTFasyQ/giphy.mp4"
+  src="#video"
   autoplay loop="true"
   geometry="primitive: plane; height: 15.8; width: 25.6"
   position="-6.8 7.4 -41"
   ></a-video>
 
-</a-entity>
 </a-scene>
 <div>lol</div>
 </body>
